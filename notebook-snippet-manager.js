@@ -11,6 +11,16 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
         }
     }
 
+    function add_snippet_to_storage(snippet_name, snippet_content) {
+        var storage = window['localStorage'];
+        var updated_snippets = storage.getItem('JupyterNotebookSnippets');
+        if (updated_snippets == null) {
+            updated_snippets = {};
+        }
+        updated_snippets[snippet_name] = snippet_content;
+        storage.setItem('JupyterNotebookSnippets', updated_snippets);
+    }
+
     function add_cell_to_snippet_manager() {
         var selected_cell = Jupyter.notebook.get_selected_cell();
         var selected_content = selected_cell.get_text();
@@ -31,7 +41,8 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
                 OK: {
                     'class': 'btn-primary',
                     'click': function() {
-                        console.log('Adding to snippet manager...');
+                        var snippet_name = $('input[name=snippet-name]').val();
+                        add_snippet_to_storage(snippet_name, selected_contet);
                     }
                 }
             }

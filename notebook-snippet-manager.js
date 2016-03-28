@@ -1,5 +1,29 @@
-define(['base/js/namespace', 'jquery'], function(Jupyter, $) {
+define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, dialog) {
     function add_cell_to_snippet_manager() {
+        var selected_cell = Jupyter.notebook.get_selected_cell();
+        var selected_content = selected_cell.get_text();
+
+        var modal_content = $('<p/>').html("Please provide a name for this snippet.");
+        modal_content.append($('<br><br>'));
+        modal_content.append($('<input type="text" name="snippet-name"/>'));
+
+        Jupyter.keyboard_manager.register_events(modal_content);
+
+        dialog.modal({
+            title: 'Add Code Cell to Snippet Manager',
+            body: modal_content,
+            buttons: {
+                Cancel: {
+                    'class': 'btn-danger'
+                },
+                OK: {
+                    'class': 'btn-primary',
+                    'click': function() {
+                        console.log('Adding to snippet manager...');
+                    }
+                }
+            }
+        });
     }
 
     function add_cell_from_snippet_manager() {

@@ -53,6 +53,21 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
     }
 
     function add_cell_from_snippet_manager() {
+        var selected_index = Jupyter.notebook.get_selected_index();
+
+        var modal_content = $('<p/>').html('Select a snippet to insert.');
+
+        dialog.modal({
+            title: 'Select A Snippet to Include',
+            body: modal_content,
+            buttons: {
+                'Insert Snippet': {
+                    'class': 'btn-primary',
+                    'click': function() {
+                    }
+                }
+            }
+        });
     }
 
     function place_snippet_manager_buttons() {

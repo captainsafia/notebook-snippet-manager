@@ -1,4 +1,16 @@
 define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, dialog) {
+    function storageAvailable(type) {
+        try {
+            var storage = window[type];
+            var x = '__storage_test__';
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
     function add_cell_to_snippet_manager() {
         var selected_cell = Jupyter.notebook.get_selected_cell();
         var selected_content = selected_cell.get_text();
@@ -57,7 +69,19 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
 
     function load_ipython_extension() {
         console.log("Loading notebook-snippet-manager extension...");
-        place_snippet_manager_buttons();
+        if (storageAvailable('localStorage')) {
+            place_snippet_manager_buttons();
+        } else {
+            var modal_text = "It looks like you have the snippet-manager";
+            modal_text += " enabled but your browser doesn't support WebStorage.";
+            modal_text += " Please switch to a browser with WebStorage to use snippet-manager.";
+            var modal_content = $('<p/>').html(modal_text);
+            dialog.modal({
+                'title': 'WebStorage Unavaialble',
+                'body': modal_content,
+                'buttons': {OK: {}}
+            });
+        }
     }
 
     return {

@@ -13,11 +13,14 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
 
     function add_snippet_to_storage(snippet_name, snippet_content) {
         var storage = window['localStorage'];
-        var updated_snippets = storage.getItem('JupyterNotebookSnippets');
-        if (updated_snippets == null) {
-            updated_snippets = {};
+        var stored_snippets = storage.getItem('JupyterNotebookSnippets');
+        if (stored_snippets == null) {
+            stored_snippets = {};
+        } else {
+            stored_snippets = JSON.parse(stored_snippets);
         }
-        updated_snippets[snippet_name] = snippet_content;
+        stored_snippets[snippet_name] = snippet_content;
+        var updated_snippets = JSON.stringify(stored_snippets);
         storage.setItem('JupyterNotebookSnippets', updated_snippets);
     }
 
@@ -42,7 +45,7 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
                     'class': 'btn-primary',
                     'click': function() {
                         var snippet_name = $('input[name=snippet-name]').val();
-                        add_snippet_to_storage(snippet_name, selected_contet);
+                        add_snippet_to_storage(snippet_name, selected_content);
                     }
                 }
             }

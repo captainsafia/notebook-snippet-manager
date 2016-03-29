@@ -1,4 +1,7 @@
-define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, dialog) {
+define(['base/js/namespace', 
+        'jquery', 
+        'base/js/dialog', 
+        './list'], function(Jupyter, $, dialog, list) {
     function storageAvailable(type) {
         try {
             var storage = window[type];
@@ -111,6 +114,7 @@ define(['base/js/namespace', 'jquery', 'base/js/dialog'], function(Jupyter, $, d
                 'buttons': {OK: {}}
             });
         }
+        console.log(list);
     }
 
     return {

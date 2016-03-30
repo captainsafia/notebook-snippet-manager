@@ -100,9 +100,13 @@ define(['base/js/namespace',
                         var selected_snippets = $('.selected input:checked');
                         var selected_content = selected_snippets.map(function() {
                             var content = $(this).parent('td').parent('tr').children('.content');
-                            return $(content.get(0)).html();
+                            return $(content.get(0)).text();
                         });
-                        console.log(selected_content);
+                        for (var index in selected_content) {
+                            var code_cell = Jupyter.notebook.insert_cell_at_index('code', selected_index + index);
+                            code_cell.set_text(selected_content[index]);
+                            code_cell.execute();
+                        }
                     }
                 }
             }

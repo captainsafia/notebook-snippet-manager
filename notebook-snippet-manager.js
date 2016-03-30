@@ -71,22 +71,24 @@ define(['base/js/namespace',
         var modal_content = $('<p/>').html('Select a snippet to insert.');
         modal_content.append('<br><br>');
         var list_content = $('<div id="snippets" style="white-space: pre-wrap;">');
-        list_content.append('<input class="search" placeholder="Search Snippets">');
-        list_content.append('<br><br>');
-
         var table = $('<table class="table"><tbody class="list"></tbody></table>');
         var table_children = table.children();
-        table_children.append('<tr><th>Snippet Name</th><th>Snippet Content</th></tr>');
+        table_children.append('<tr><th>Insert?</th>' +
+                            '<th>Snippet Name</th>' +
+                            '<th>Snippet Content</th></tr>');
 
         var snippets = get_snippets();
         for (var index in snippets) {
             var snippet = snippets[index];
-            table_children.append('<tr><td class="name">' + index + '</td>' +
+            table_children.append('<tr><td class="selected"><input type="checkbox"/></td>' +
+                                    '<td class="name">' + index + '</td>' +
                                     '<td class="content">' + snippet + '</td></tr>');
         }
 
         list_content.append(table);
         modal_content.append(list_content);
+
+        Jupyter.keyboard_manager.register_events(modal_content);
 
         dialog.modal({
             title: 'Select A Snippet to Include',
@@ -95,10 +97,17 @@ define(['base/js/namespace',
                 'Insert Snippet': {
                     'class': 'btn-primary',
                     'click': function() {
+                        var selected_snippets = $('.selected input:checked');
+                        var selected_content = selected_snippets.map(function() {
+                            var content = $(this).parent('td').parent('tr').children('.content');
+                            return $(content.get(0)).html();
+                        });
+                        console.log(selected_content);
                     }
                 }
             }
         });
+
     }
 
     function place_snippet_manager_buttons() {

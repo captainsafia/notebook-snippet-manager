@@ -149,14 +149,14 @@ define(['base/js/namespace',
 
     if ($(".snippet-manager-buttons").length === 0) {
       Jupyter.toolbar.add_buttons_group([{
-          'label': 'Add Cell to Snippet Manager',
+          'label': '',
           'icon': 'fa-arrow-circle-up',
           'callback': add_cell_to_snippet_manager,
           'id': 'add-cell-to-snippet-manager',
           'class': 'snippet-manager-buttons'
         },
         {
-          'label': 'Add Cell from Snippet Manager',
+          'label': '',
           'icon': 'fa-arrow-circle-down',
           'callback': add_cell_from_snippet_manager,
           'id': 'add-cell-from-snippet-manager',

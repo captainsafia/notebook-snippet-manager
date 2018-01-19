@@ -132,7 +132,7 @@ define(['base/js/namespace',
               return $(name.get(0)).text();
             });
             for (var index in selected_names) {
-              remove_snippet_from_manager(selected_names[index]);
+              remove_snippet_from_storage(selected_names[index]);
             }
           }
         }

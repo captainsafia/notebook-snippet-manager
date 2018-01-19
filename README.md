@@ -12,8 +12,8 @@ repository so you can stay on top of the latest updates!
 - [ ] Add ability to search through snippets
 
 ### Installation Instructions
-1. Run `jupyter --config-dir` to determine the location of your Jupyter Notebook configuration
-2. Download `notebook-snippet-manager.js` and `list.js` and copy them to `$(jupyter --config-dir)/nbextensions`.
+1. Run `jupyter --data-dir` to determine the location of your Jupyter Notebook configuration
+2. Download `notebook-snippet-manager.js` and `list.js` and copy them to `$(jupyter --data-dir)/nbextensions`.
 3. Run `jupyter nbextension enable notebook-snippet-manager`.
 
 ### Usage Screencast

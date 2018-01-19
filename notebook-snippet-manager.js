@@ -31,7 +31,7 @@ define(['base/js/namespace',
   function remove_snippet_from_storage(snippet_name) {
     var storage = window['localStorage'];
     var stored_snippets = storage.getItem('JupyterNotebookSnippets');
-    if (sotred_snippets == null) {
+    if (stored_snippets == null) {
       return;
     } else {
       stored_snippets = JSON.parse(stored_snippets);

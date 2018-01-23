@@ -16,5 +16,7 @@ repository so you can stay on top of the latest updates!
 2. Download `notebook-snippet-manager.js` and `list.js` and copy them to `$(jupyter --data-dir)/nbextensions`.
 3. Run `jupyter nbextension enable notebook-snippet-manager`.
 
+    cp list.js notebook-snippet-manager.js $(jupyter --data-dir)/nbextensions
+
 ### Usage Screencast
 ![Usage Screencast](notebook-snippet-manager-screencast.gif)

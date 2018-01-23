@@ -119,7 +119,6 @@ define(['base/js/namespace',
             for (var index in selected_content) {
               var code_cell = Jupyter.notebook.insert_cell_at_index('code', selected_index + index);
               code_cell.set_text(selected_content[index]);
-              code_cell.execute();
             }
           }
         },

@@ -31,7 +31,7 @@ define(['base/js/namespace',
   function remove_snippet_from_storage(snippet_name) {
     var storage = window['localStorage'];
     var stored_snippets = storage.getItem('JupyterNotebookSnippets');
-    if (sotred_snippets == null) {
+    if (stored_snippets == null) {
       return;
     } else {
       stored_snippets = JSON.parse(stored_snippets);
@@ -119,7 +119,6 @@ define(['base/js/namespace',
             for (var index in selected_content) {
               var code_cell = Jupyter.notebook.insert_cell_at_index('code', selected_index + index);
               code_cell.set_text(selected_content[index]);
-              code_cell.execute();
             }
           }
         },
@@ -132,7 +131,7 @@ define(['base/js/namespace',
               return $(name.get(0)).text();
             });
             for (var index in selected_names) {
-              remove_snippet_from_manager(selected_names[index]);
+              remove_snippet_from_storage(selected_names[index]);
             }
           }
         }
@@ -149,14 +148,14 @@ define(['base/js/namespace',
 
     if ($(".snippet-manager-buttons").length === 0) {
       Jupyter.toolbar.add_buttons_group([{
-          'label': 'Add Cell to Snippet Manager',
+          'label': 'Rec',
           'icon': 'fa-arrow-circle-up',
           'callback': add_cell_to_snippet_manager,
           'id': 'add-cell-to-snippet-manager',
           'class': 'snippet-manager-buttons'
         },
         {
-          'label': 'Add Cell from Snippet Manager',
+          'label': 'Ins',
           'icon': 'fa-arrow-circle-down',
           'callback': add_cell_from_snippet_manager,
           'id': 'add-cell-from-snippet-manager',
